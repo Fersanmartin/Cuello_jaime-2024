@@ -1,0 +1,37 @@
+jaime:
+  
+  # Publish all joint states -----------------------------------
+  joint_states_controller:
+      type: joint_state_controller/JointStateController
+      publish_rate: 25
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+      type: position_controllers/JointPositionController
+      joint: primero
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+      publish_rate: 25
+        
+  joint2_position_controller:
+      type: position_controllers/JointPositionController
+      joint: segundo
+      pid: {p: 100.0, i: 0.01, d: 10.0} 
+      publish_rate: 25
+
+  joint3_position_controller:
+      type: position_controllers/JointPositionController
+      joint: tercero
+      pid: {p: 100.0, i: 0.01, d: 10.0} 
+      publish_rate: 25
+
+  joint4_position_controller:
+      type: position_controllers/JointPositionController
+      joint: cuarto
+      pid: {p: 100.0, i: 0.01, d: 10.0} 
+      publish_rate: 25
+
+  joint5_position_controller:
+      type: position_controllers/JointPositionController
+      joint: quinto
+      pid: {p: 100.0, i: 0.01, d: 10.0} 
+      publish_rate: 25

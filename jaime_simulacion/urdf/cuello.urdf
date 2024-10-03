@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_name">
+
+<xacro:property name="ancho" value="0.2">
+
+</xacro:property>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/base_segment.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.1 0.7"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="entre_cuello_link">
+  <origin xyz="0 0.0 -0.0" rpy="0.0 0.0 0.0"/>
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/middle_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0 0.0 -0.0" rpy="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <link name="cuello_link">
+  <origin xyz="0. 0.0 0" rpy="0.0 0.0 0.0"/>
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/middle_segment.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0 0.0 0" rpy="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <link name="entre_cuello_2_link">
+  <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/upper_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <link name="cuello_2_link">
+  <origin xyz="0 0.0 0" rpy="0.0 0.0 0.0"/>
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/upper_segment.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <link name="cuello_3_link">
+  <origin xyz="0 0.0 0" rpy="0.0 0.0 0.0"/>
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/top_segment.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+  <link name="Tablet">
+    <visual>
+      <geometry>
+        <mesh filename="package://jaime_simulacion/meshes/tablet.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </visual>
+
+    <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0.0"/>
+    <geometry>
+      <box size="0.01 0.17 0.25"/>
+    </geometry>
+    </collision>
+  </link>
+
+  <joint name="primero" type="revolute">
+    <parent link="base_link"/>
+    <child link="entre_cuello_link"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="-0.158 0.0 0.68518" rpy="0.0 0 0.0"/>
+    <limit upper="0.785" lower="0" velocity="2" effort="1"/>
+  </joint>
+
+  <joint name="segundo" type="revolute">
+    <parent link="entre_cuello_link"/>
+    <child link="cuello_link"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="-0.02 0.0 0.12" rpy="0.0 0 0.0"/>
+    <limit upper="0.785" lower="0" velocity="2" effort="1"/>
+    <mimic joint="primero" multiplier="1" offset="0" />
+  </joint>
+
+  <joint name="tercero" type="revolute">
+    <parent link="cuello_link"/>
+    <child link="entre_cuello_2_link"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="0.03 0.0 0.18" rpy="0.0 0 0.0"/>
+    <limit upper="0.785" lower="0" velocity="2" effort="1"/>
+  </joint>
+
+  <joint name="cuarto" type="revolute">
+    <parent link="entre_cuello_2_link"/>
+    <child link="cuello_2_link"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="0.055 0.0 0.16" rpy="0.0 0 0.0"/>
+    <limit upper="0.785" lower="0" velocity="2" effort="1"/>
+    <mimic joint="tercero" multiplier="1" offset="0" /> 
+  </joint>
+
+  <joint name="quinto" type="revolute">
+    <parent link="cuello_2_link"/>
+    <child link="cuello_3_link"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="0.063 0.0 0.138" rpy="0.0 0 0.0"/>
+    <limit upper="0.785" lower="0" velocity="2" effort="1"/>
+  </joint>
+
+  <joint name="tablet" type="fixed">
+    <parent link="cuello_3_link"/>
+    <child link="Tablet"/>
+    <origin xyz="0.13 0.0 0.11" rpy="0.0 0 0.0"/>
+  </joint>
+
+</robot>
